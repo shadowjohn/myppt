@@ -1,6 +1,8 @@
 # myppt
 評選簡報致勝方程式
 
+<pre>
+
 目前需要的環境如下：
 1. Linux Server (Ubuntu or Fedora 都可以)
 2. Requires:
@@ -15,3 +17,4 @@
 　　請詳見 inc/config.php、inc/conn.php
 
       
+</pre>
