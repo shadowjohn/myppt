@@ -15,6 +15,6 @@
       apache >= 2.4
 3. 預設安裝路徑：/var/www/ppt
 　　請詳見 inc/config.php、inc/conn.php
-
+4. DB Schema：詳見 DB/*.sql
       
 </pre>
