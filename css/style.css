@@ -1,0 +1,19 @@
+html,body{  
+  padding:0px;
+  margin:0px;  
+}
+table th{
+  background-color:orange;
+  color:black;
+  font-weight:bold;
+}
+table td{
+  padding:5px;
+}
+h2{
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+  border-bottom:2px dashed red;
+  width:50%;
+}
