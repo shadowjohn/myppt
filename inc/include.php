@@ -2043,14 +2043,21 @@
     apache_setenv('no-gzip', 1);
     header('Content-Type: application/octet-stream');
     //如果是IE，要轉成 BIG5
-    $bigf = $filename;
-    if(is_string_like(user_agent(),'%MSIE%'))
+    $bigf = $filename;        
+    if(is_string_like(user_agent(),'%MSIE%') || is_string_like(user_agent(),'%rv_11%') )
     {
       $bigf=utf8tobig5($bigf);
     }
     if($download_display==null)
     {
       $download_display=basename($bigf); 
+    }
+    else
+    {
+      if(is_string_like(user_agent(),'%MSIE%') || is_string_like(user_agent(),'%11%') )
+      {
+        $download_display=utf8tobig5($download_display);
+      }    
     }
     header("Content-Disposition: attachment; filename=\"{$download_display}\"");
     header('Content-Transfer-Encoding: binary');

@@ -53,7 +53,7 @@
               ORDER BY 
                 `ppt_id` DESC,
                 `id` ASC
-        ";        
+        ";      
         #pdo
         $SQL_ROWS="SELECT COUNT(*) AS `COUNTER` FROM ({$SQL}) a";
         $ra_counts=selectSQL_SAFE($SQL_ROWS,$PA); 

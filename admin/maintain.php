@@ -1,10 +1,36 @@
 <?php require '../inc/config.php'; ?>
 <?php
-  $SQL="SELECT * FROM `ppt` ORDER BY `id` DESC";
-  $ra=selectSQL($SQL);
+  $GETS_STRING="searchcode";
+  $GETS=getGET_POST($GETS_STRING,"GET");
+  $SQL_APPEND="";
+  $PA=ARRAY();
+
+  $SQL_APPEND.=" OR CONCAT(`orin_filename`,`title`,`keyword`) LIKE ? ";
+  array_push($PA,"%{$GETS['searchcode']}%");
+
+  $SQL="
+          SELECT * FROM 
+            `ppt`
+          WHERE
+            1=1
+            AND (0=1 {$SQL_APPEND} )  
+          ORDER BY 
+            `id` DESC
+       ";       
+  $SQL_ROWS="SELECT COUNT(*) AS `COUNTER` FROM ({$SQL}) a";
+            $ra_counts=selectSQL_SAFE($SQL_ROWS,$PA); 
+            $totals_rows=$ra_counts[0]['COUNTER'];
+            $SQL.=sprintf(" LIMIT %d,%d",($page*$p),$p);  
+  $ra=selectSQL_SAFE($SQL,$PA);
   foreach($ra as $k=>$v)
   {
+    //檔名顏色
+    $ra[$k]['f_orin_filename']=str_ireplace("{$GETS['searchcode']}","<span class='find_word'>{$GETS['searchcode']}</span>",$ra[$k]['orin_filename']);
+    $ra[$k]['f_title']=str_ireplace("{$GETS['searchcode']}","<span class='find_word'>{$GETS['searchcode']}</span>",$ra[$k]['title']);
+    $ra[$k]['f_keyword']=str_ireplace("{$GETS['searchcode']}","<span class='find_word'>{$GETS['searchcode']}</span>",$ra[$k]['keyword']);
+    
     $ra[$k]['f_id']="<center>{$ra[$k]['id']}</center>";
+    $ra[$k]['ppt']="<a target='_blank' href='{$base_url}/api.php?mode=download&ppt_id={$ra[$k]['id']}'>PPT</a>";
     switch($ra[$k]['pdf_status'])
     {
       case '0':
@@ -56,7 +82,7 @@
     $("input[req^='del_']").unbind("click");
     $("input[req^='del_']").click(function(){
       var id=end(explode("_",$(this).attr('req')));
-      if(confirm("要除這個ppt嗎！？")==true)
+      if(confirm("要刪除嗎！？")==true)
       {
         var o=new Object();
         o['id']=id;
@@ -71,11 +97,23 @@
 <?php require "{$base_dir}/template/body.php"; ?>
 <?php require "{$base_dir}/template/top.php"; ?>
 <!--start-->
-  <h2>簡報維護</h2>
+  <h2>簡報維護</h2>  
+  <center>
+    <form method="GET" action="?">
+    搜尋：<input type="text" id="searchcode" name="searchcode" placeholder="請輸入搜尋關鍵字">
+    <input type="submit" value="搜尋">
+    </form>
+  </center>
+  <br>
   <center>
   <?php
-  echo print_table($ra,"f_id,orin_filename,title,create_datetime,f_pdf_status,f_png_status,OTHER",
-  "序號,檔名,標題,建檔時間,PDF,圖檔/文字,其他");
+  echo print_table($ra,"f_id,f_orin_filename,f_title,create_datetime,ppt,f_pdf_status,f_png_status,OTHER",
+  "序號,檔名,標題,建檔時間,檔案,PDF,圖檔/文字,其他");
+  ?>
+  <br>
+  <?php
+  $SCODE = urlencode($GETS['searchcode']);
+  array_page($totals_rows,$page,$p,$px,"searchcode={$SCODE}",$mode='normal',$spandiv='');
   ?>
   </center>
 <!--end-->
