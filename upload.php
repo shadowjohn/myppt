@@ -104,7 +104,7 @@
 <!--start-->
   <h2>各種簡報上傳</h2>
   <fieldset style="width:50%;margin-left:auto;margin-right:auto;">
-    <legend>上傳檔案：(doc,docx,ppt,pptx,pdf...)</legend>
+    <legend>上傳檔案(可複選多個)：(doc,docx,ppt,pptx,pdf...)</legend>
     <form id='theform' action="?mode=upload" method="post" enctype="multipart/form-data">
       上傳檔案：<input type="file" id="upfile" name="upfile[]" multiple="true">
       <input id="submit_btn" type="submit" value="上傳">    

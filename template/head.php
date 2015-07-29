@@ -4,6 +4,9 @@
   <meta name="Resource-Type" content="document">
   <meta name="Distribution" content="Global">   
   <title>簡報贏家方程式</title>
+  <meta name="Author" content="Pinky,Elly,Jerry,保宏,Phoeni,John">
+  <meta name="Keywords" content="ppt,pptx,doc,docx,pdf,文件歸類,文件搜尋">
+  <meta name="Generator" content="3WA-Company">
   <link href="<?php echo $base_url;?>/css/reset.css" rel="stylesheet" type="text/css">
   <link href="<?php echo $base_url;?>/css/style.css" rel="stylesheet" type="text/css">
 

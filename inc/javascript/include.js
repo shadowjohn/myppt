@@ -403,7 +403,7 @@ function ajax_post_encode(data)
 {
   return encodeURIComponent(data);
 }
-function myAjax_async(url,postdata,dom,func)
+function myAjax_async(url,postdata,func)
 {
   $.ajax({
       url: url,
@@ -411,11 +411,7 @@ function myAjax_async(url,postdata,dom,func)
       data: postdata,
       async: true,
       dataType: 'html',
-      success: function(html){
-        if(dom!="")
-        {
-          $(dom).html(html);
-        }
+      success: function(html){       
         func(html);        
       }
   });  
@@ -1212,4 +1208,57 @@ function timedownbutton(button_dom,title,seconds,done_func)
   }
   
   window['time_down_func_'+t]();
+}
+function print_table($ra,$fields,$headers,$classname)
+{    
+  $classname=(typeof($classname)=="undefined"||$classname=='')?'':" class='"+$classname+"' ";
+  if(typeof($fields)=="undefined"||$fields==''||$fields=='*')
+  {      
+
+      $tmp=sprintf("<table %s border='1' cellspacing='0' cellpadding='0'>",$classname);
+      $tmp+="<thead><tr>";
+      for(var k in $ra[0])
+      {
+        $tmp+=sprintf("<th>%s</th>",k);
+      }
+      $tmp+="</tr></thead>";
+      $tmp+="<tbody>";
+      for($i=0,$max_i=count($ra);$i<$max_i;$i++)
+      {
+        $tmp+="<tr>";
+        for(var k in $ra[$i])
+        {
+          $tmp+=sprintf("<td field=\"%s\">%s</td>",k,$ra[$i][k]);
+        }
+        $tmp+="</tr>";
+      }
+      $tmp+="</tbody>";
+      $tmp+="</table>";
+      return $tmp;
+  }
+  else
+  {
+    $tmp=sprintf("<table %s border='1' cellspacing='0' cellpadding='0'>",$classname);
+    $tmp+="<thead><tr>";
+    $mheaders=explode(',',$headers);
+    for(var k in $mheaders)
+    {
+      $tmp+=sprintf("<th>%s</th>",$mheaders[k]);
+    }
+    $tmp+="</tr></thead>";
+    $tmp+="<tbody>";
+    $m_fields=explode(',',$fields);
+    for($i=0,$max_i=count($ra);$i<$max_i;$i++)
+    {
+      $tmp+="<tr>";
+      for(var k in $m_fields)
+      {
+        $tmp+=sprintf("<td field=\"%s\">%s</td>",k,$ra[$i][$m_fields[k]]);
+      }
+      $tmp+="</tr>";
+    }
+    $tmp+="</tbody>";
+    $tmp+="</table>";
+    return $tmp;
+  }
 }

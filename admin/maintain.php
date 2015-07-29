@@ -4,6 +4,7 @@
   $ra=selectSQL($SQL);
   foreach($ra as $k=>$v)
   {
+    $ra[$k]['f_id']="<center>{$ra[$k]['id']}</center>";
     switch($ra[$k]['pdf_status'])
     {
       case '0':
@@ -51,7 +52,19 @@
 <?php require "{$base_dir}/template/head.php"; ?>
 <script language="javascript">
   $(document).ready(function(){
-
+    //刪除
+    $("input[req^='del_']").unbind("click");
+    $("input[req^='del_']").click(function(){
+      var id=end(explode("_",$(this).attr('req')));
+      if(confirm("要除這個ppt嗎！？")==true)
+      {
+        var o=new Object();
+        o['id']=id;
+        myAjax("<?=$base_url;?>/api.php?mode=del_ppt",o);
+        alert("已刪除...");
+        location.reload();
+      }
+    });
   });
 </script>
 </head>
@@ -61,8 +74,8 @@
   <h2>簡報維護</h2>
   <center>
   <?php
-  echo print_table($ra,"id,orin_filename,title,keyword,page,create_datetime,f_pdf_status,f_png_status,OTHER",
-  "序號,檔名,標題,建檔時間,頁數,關鍵字,PDF,圖檔/文字,其他");
+  echo print_table($ra,"f_id,orin_filename,title,create_datetime,f_pdf_status,f_png_status,OTHER",
+  "序號,檔名,標題,建檔時間,PDF,圖檔/文字,其他");
   ?>
   </center>
 <!--end-->

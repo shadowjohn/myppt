@@ -1,4 +1,8 @@
-<?php   
+<?php
+  function __($data)
+  {
+    return $data;
+  }   
   function array_htmlspecialchars(&$input)
   {
       if (is_array($input))
@@ -785,7 +789,8 @@
 	outline: none;
 	width: 40px;
 	text-align: center;
-	background: #333;
+	background: #eee;
+  color:#000;
 }
 
 .pagination .jump button  {

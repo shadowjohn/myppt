@@ -18,26 +18,27 @@
   .thetable{
     
   }
-  .thetable td:nth-child(1){
+  .thetable td[field='f_p']{
     width:30px;
     text-align:center;
   }
-  .thetable td:nth-child(2){
+  .thetable td[field='f_png']{
     text-align:center;
     width:80px;
   }
-  .thetable td:nth-child(3){    
+  .thetable td[field='contents']{    
     width:280px;
   }
-  .thetable td:nth-child(4){
+  .thetable td[field='kind']{
     text-align:center;    
     width:50px;
   }
-  .thetable td:nth-child(5){    
+  .thetable td[field='keyword']{    
     width:250px;
   }
   .thepng{
     cursor:pointer;
+    border:1px solid #000;
   }
 </style>
 <script language="javascript">
@@ -46,7 +47,10 @@
     $(".thepng").unbind("click");
     $(".thepng").click(function(){
       var tmp = "";
-      tmp = sprintf("<img width='%s' src='%s'>",(window['wh']['width']*50/100 ),$(this).attr('src'));
+      tmp = sprintf("<div style='text-align:center;width:%dpx;height:%dpx;overflow:auto;'><img style='background-color:white;width='%s' src='%s'></div>",
+      (window['wh']['width']*80/100 ),
+      (window['wh']['height']*80/100 ),
+      (window['wh']['width']*50/100 ),$(this).attr('src'));
       dialogOn(tmp,true,function(){        
       });
     });
