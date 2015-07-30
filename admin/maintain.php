@@ -30,7 +30,7 @@
     $ra[$k]['f_keyword']=str_ireplace("{$GETS['searchcode']}","<span class='find_word'>{$GETS['searchcode']}</span>",$ra[$k]['keyword']);
     
     $ra[$k]['f_id']="<center>{$ra[$k]['id']}</center>";
-    $ra[$k]['ppt']="<a target='_blank' href='{$base_url}/api.php?mode=download&ppt_id={$ra[$k]['id']}'>PPT</a>";
+    $ra[$k]['ppt']="<a target='_blank' href='{$base_url}/api.php?mode=download&ppt_id={$ra[$k]['id']}'>下載</a>";
     switch($ra[$k]['pdf_status'])
     {
       case '0':

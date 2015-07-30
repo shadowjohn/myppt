@@ -81,14 +81,15 @@
         },
         complete: function(xhr) {
             alert("傳完了...");                
-            dialogMyBoxOff();                
-            location.reload();         
+            dialogOff();                
+            //location.reload();
+            location.href="<?=$base_url;?>/admin/maintain.php";         
         }
     });
   }
   $(document).ready(function(){        
     $("#theform").submit(function(){
-      dialogMyBoxOn("上傳中...<span id='percent'>0%</span>",false,function(){            
+      dialogOn("上傳中...<span id='percent'>0%</span>",false,function(){            
         mySubmit();
       });
       

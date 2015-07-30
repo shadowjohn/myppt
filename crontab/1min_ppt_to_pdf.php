@@ -10,7 +10,8 @@
     //狀態改成轉檔中
     $m=ARRAY();
     $m['pdf_status']='1';
-    updateSQL('ppt',$m,"`id`='{$ra[$i]['id']}'");    
+    updateSQL('ppt',$m,"`id`='{$ra[$i]['id']}'");
+        
     `rm -fr {$base_dir}/tmp/pdf/{$ra[$i]['id']}`;
     `mkdir {$base_dir}/tmp/pdf/{$ra[$i]['id']} -p`;
     $sn = subname($ra[$i]['filename']);

@@ -45,8 +45,8 @@
         break;
       case 'jquery-ui':
           ?>
-            <script src="<?php echo $base_url;?>/inc/javascript/jquery/jquery_UI/jquery-ui-1.8.23/ui/minified/jquery-ui.min.js" type="text/javascript"></script>
-            <link href="<?php echo $base_url;?>/inc/javascript/jquery/jquery_UI/jquery-ui-1.8.23/themes/base/minified/jquery-ui.min.css" rel="stylesheet" type="text/css">
+            <script src="<?php echo $base_url;?>/inc/javascript/jquery/jquery_UI/jquery-ui-1.8.24/ui/minified/jquery-ui.min.js" type="text/javascript"></script>
+            <link href="<?php echo $base_url;?>/inc/javascript/jquery/jquery_UI/jquery-ui-1.8.24/themes/base/minified/jquery-ui.min.css" rel="stylesheet" type="text/css">
           <?php
         break;
       case 'jquery-corner':
