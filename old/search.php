@@ -1,8 +1,4 @@
-<?php require 'inc/config.php'; 
-  //$SQL = "SELECT DISTINCT `kind` FROM `ppt`";
-  //$ra = selectSQL($SQL);
-  //pre_print_r($ra);
-?>
+<?php require 'inc/config.php'; ?>
 <?php require "{$base_dir}/template/html.php"; ?>
 <?php require "{$base_dir}/template/head.php"; ?>
 <style>
@@ -15,7 +11,6 @@
 <script language="javascript">
   function doSearch(page){
     var code = trim($("#searchcode").val());
-    var kind = trim($("#kind").val());
     if(code=="")
     {
       //alert("你這樣資料會太多啦...")
@@ -24,7 +19,6 @@
     page=(typeof(page)=="undefined")?"0":page;
     dialogOn("請稍候...",false,function(){
       var o =new Object();
-      o['kind']=kind;
       o['searchcode']=code;
       myAjax_async("<?=$base_url;?>/api.php?mode=searchcode&page="+page,o,function(data){
         var jdata = json_decode(data,true);
@@ -119,13 +113,7 @@
 <!--start-->
   <h2>簡報快查</h2>
   <center>
-    類　型：
-    <select id="kind" name="kind">
-      <option value="">ALL</option>
-      <option value="ppt">ppt</option>
-      <option value="pdf">pdf</option>
-      <option value="doc">doc</option>
-    </select><br>
+    類　型：<select id="kind" name="kind"></select><br>
     關鍵字：<input type="text" id="searchcode" name="searchcode" placeholder="請輸入查詢關鍵字啊...(可用半型逗號分格)" style="width:400px;">    
     <input type="button" value="查詢" id="search_btn">
   <br>

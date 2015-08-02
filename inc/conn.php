@@ -21,11 +21,7 @@
     @ini_set('session.save_path', '/tmp');
   }
   
-  $DB_HOST="localhost";
-  $DB_LOGIN="ppt";
-  $DB_PASSWORD="*gis5200";
-  $DB_NAME="myppt";
-  $DB_KIND="mysql";
+
   try{    
     $pdo = new PDO("{$DB_KIND}:dbname={$DB_NAME};host={$DB_HOST}",$DB_LOGIN,$DB_PASSWORD);
   }catch(PDOException $Exception){
@@ -62,7 +58,7 @@
   
   
   
-  $p=15;  //每頁顯示５筆
+  $p=500;  //每頁顯示５筆
   $px=5;   //每頁顯示跳頁用的５筆  
   if(isset($page))
   {

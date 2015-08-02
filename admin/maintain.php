@@ -1,5 +1,5 @@
-<?php require '../inc/config.php'; ?>
-<?php
+<?php require '../inc/config.php'; 
+  $include_mode="jquery-ui";
   $GETS_STRING="searchcode";
   $GETS=getGET_POST($GETS_STRING,"GET");
   $SQL_APPEND="";
@@ -52,7 +52,7 @@
         $ra[$k]['f_png_status']="轉檔中";
         break;
       case '2':
-        $ra[$k]['f_png_status']="<center><a target='_blank' req='png_text_{$ra[$k]['id']}' href='{$base_url}/admin/png_text_edit.php?id={$ra[$k]['id']}'>維護</a></center>";
+        $ra[$k]['f_png_status']="<center><a target='_blank' req='png_text_{$ra[$k]['id']}' href='#' action='{$base_url}/admin/png_text_edit.php?id={$ra[$k]['id']}'>維護</a></center>";
         break;
     }
     switch($ra[$k]['text_status'])
@@ -78,6 +78,40 @@
 <?php require "{$base_dir}/template/head.php"; ?>
 <script language="javascript">
   $(document).ready(function(){
+    //維護
+    $("a[req^='png_text_']").unbind("click");
+    $("a[req^='png_text_']").click(function(){
+      window['wh']=getWindowSize();
+      var tmp = "";
+      tmp+=sprintf("<div style='width:%dpx;height:%dpx;overflow:auto;'>",
+        (window['wh']['width']*80/100),
+        (window['wh']['height']*80/100));
+      tmp+=myAjax($(this).attr('action'),"");
+      tmp+="</div>";
+      dialogOn(tmp,false,function(){
+      });
+      return false;
+    });
+    //編輯
+    $("input[req^='edit_']").unbind("click");
+    $("input[req^='edit_']").click(function(){      
+      var id = end(explode("_",$(this).attr('req')));
+      dialogOn("請稍候...",false,function(){
+        myAjax_async("<?=$base_url;?>/admin/edit_ppt.php?id="+id,"",function(tmp){          
+          dialogOn(tmp,false,function(){
+            //save
+            $("#ppt_save_btn").unbind("click");
+            $("#ppt_save_btn").click(function(){
+              var o = $("#theform").serialize();
+              var tmp = myAjax("<?=$base_url;?>/api.php?mode=save_ppt_edit",o);
+              alert(tmp);
+              alert("儲存成功了...");
+            });
+          });
+        });
+      });
+      
+    });
     //刪除
     $("input[req^='del_']").unbind("click");
     $("input[req^='del_']").click(function(){
@@ -89,7 +123,7 @@
         myAjax("<?=$base_url;?>/api.php?mode=del_ppt",o);
         alert("已刪除...");
         location.reload();
-      }
+      } 
     });
   });
 </script>

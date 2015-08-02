@@ -393,6 +393,7 @@ function myAjax(url,postdata)
       url: url,
       type: "POST",
       data: postdata,
+      timeout:999999,
       dataType: 'html',
       //crossDomain:true,
       async: false
@@ -409,6 +410,7 @@ function myAjax_async(url,postdata,func)
       url: url,
       type: "POST",
       data: postdata,
+      timeout:999999,
       async: true,
       dataType: 'html',
       success: function(html){       
@@ -780,10 +782,10 @@ function dialogOn(message,isTouchOutSideClose,functionAction)
     is_background_touch_close:isTouchOutSideClose,
 		message : message,
 		css : {
-      border : '2px solid #fff',
-			backgroundColor : '#000',
-			color : '#fff',
-			padding:'15px'
+      'border' : '2px solid #fff',
+			'background-color' : '#fff',
+			'color' : '#000',
+			'padding' : '15px'
 		},		
 		onBlock : function() {      
 			functionAction();      

@@ -9,7 +9,13 @@
   @mkdir($OUTPUT_PDF,0777,true);
   
   $OUTPUT_PNG = "{$base_dir}/OUTPUT/png";
-  @mkdir($OUTPUT_PNG,0777,true); 
+  @mkdir($OUTPUT_PNG,0777,true);     
+  
+  $DB_HOST="localhost";
+  $DB_LOGIN="ppt";
+  $DB_PASSWORD="*gis5200";
+  $DB_NAME="myppt";
+  $DB_KIND="mysql";  
   
   include 'conn.php';
   include 'include.php';
