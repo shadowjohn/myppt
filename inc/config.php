@@ -11,11 +11,19 @@
   $OUTPUT_PNG = "{$base_dir}/OUTPUT/png";
   @mkdir($OUTPUT_PNG,0777,true);     
   
-  $DB_HOST="localhost";
-  $DB_LOGIN="ppt";
-  $DB_PASSWORD="*gis5200";
-  $DB_NAME="myppt";
-  $DB_KIND="mysql";  
+  if(!is_file("{$base_dir}/../ppt_config.php"))
+  {
+    /*
+      $DB_HOST="localhost";
+      $DB_LOGIN="ppt";
+      $DB_PASSWORD="*******";
+      $DB_NAME="myppt";
+      $DB_KIND="mysql";
+    */
+    echo "{$base_dir}/../ppt_config.php not found...";
+    exit();
+  }
+  include "{$base_dir}/../ppt_config.php";
   
   include 'conn.php';
   include 'include.php';
