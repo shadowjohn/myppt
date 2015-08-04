@@ -178,7 +178,7 @@ table a{
 table img {
     border: 0;
     -ms-interpolation-mode: bicubic;
-    border-radius: 50%;
+    /*border-radius: 50%;*/
 }
 
 .thetable td {

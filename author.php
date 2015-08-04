@@ -58,5 +58,6 @@
     </table>
   </center>
 <!--end-->
+<?php require "{$base_dir}/template/footer.php"; ?>
 </body>
 </html>

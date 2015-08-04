@@ -1,5 +1,5 @@
 <?php require '../inc/config.php'; 
-  $include_mode="jquery-ui";
+  $include_mode="jquery-ui|jquery-datetimepicker";
   $GETS_STRING="searchcode";
   $GETS=getGET_POST($GETS_STRING,"GET");
   $SQL_APPEND="";
@@ -94,23 +94,39 @@
     });
     //編輯
     $("input[req^='edit_']").unbind("click");
-    $("input[req^='edit_']").click(function(){      
+    $("input[req^='edit_']").click(function(){            
       var id = end(explode("_",$(this).attr('req')));
-      dialogOn("請稍候...",false,function(){
-        myAjax_async("<?=$base_url;?>/admin/edit_ppt.php?id="+id,"",function(tmp){          
-          dialogOn(tmp,false,function(){
-            //save
-            $("#ppt_save_btn").unbind("click");
-            $("#ppt_save_btn").click(function(){
-              var o = $("#theform").serialize();
-              var tmp = myAjax("<?=$base_url;?>/api.php?mode=save_ppt_edit",o);
-              alert(tmp);
-              alert("儲存成功了...");
-            });
+      var dom = $(this);
+      myAjax_async("<?=$base_url;?>/admin/edit_ppt.php?id="+id,"",function(tmp){
+        dialogOn(tmp,false,function(){                            
+          //save
+          $("#ppt_save_btn").unbind("click");
+          $("#ppt_save_btn").click(function(){
+            var o = $("#theform").serialize();
+            var tmp = myAjax("<?=$base_url;?>/api.php?mode=save_ppt_edit&id="+id,o);
+            //alert(tmp);
+            alert("儲存成功了...");
+            //alert(dom.parent().parent().html());
+            var jtmp = json_decode(tmp,true);
+            //alert(dom.parent().parent().find("td[field='"+k+"']").size());
+            for(var k in jtmp)
+            {  
+              //alert(k+","+jtmp[k]);
+              $(dom.parent().parent()).find("td[field='"+k+"']").html(jtmp[k]);
+              $(dom.parent().parent()).find("td[field='f_"+k+"']").html(jtmp[k]);
+              $(dom.parent().parent()).find("td[field='fake_"+k+"']").html(jtmp[k]);              
+            }
+            
+            $(dom.parent().parent()).addClass("trShow",1000);        
+            (function (x) {
+              setTimeout(function(){
+                x.removeClass("trShow",1000);
+              },3500);
+            })($(dom.parent().parent()));
+            dialogOff();
           });
         });
-      });
-      
+      });       
     });
     //刪除
     $("input[req^='del_']").unbind("click");
@@ -151,5 +167,6 @@
   ?>
   </center>
 <!--end-->
+<?php require "{$base_dir}/template/footer.php"; ?>
 </body>
 </html>

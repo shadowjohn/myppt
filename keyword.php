@@ -9,5 +9,6 @@
   <h2>關鍵詞維護</h2>
 </center>
 <!--end-->
+<?php require "{$base_dir}/template/footer.php"; ?>
 </body>
 </html>

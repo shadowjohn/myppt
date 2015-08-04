@@ -6,7 +6,16 @@
   $FIELDS="id,kind,title,計畫名稱,年度,簡報人,簡報類別,報告書類型,是否有拿到計畫,競爭對手,委員名單,評選心得,是否延續型計畫,orin_filename,filename,keyword,create_datetime,upload_datetime,author,pdf_status,png_status,text_status,has_single_page,download_counter,grades";
   $mFIELDS=explode(",",$FIELDS);
   $SQL="SELECT * FROM `ppt` WHERE `id` = ? LIMIT 1";
-  $ra = selectSQL_SAFE($SQL,ARRAY($GETS['id']));  
+  $ra = selectSQL_SAFE($SQL,ARRAY($GETS['id'])); 
+  $edit_title = "";
+  if(mb_strlen($ra[0]['orin_filename'])>=15)
+  {
+    $edit_title=mb_substr($ra[0]['orin_filename'],0,10)."...";
+  } 
+  else
+  {
+    $edit_title = $ra[0]['orin_filename'];
+  }
 ?>
 <script language="javascript">
   $(document).ready(function(){    
@@ -15,25 +24,51 @@
      {
       ?>
       $("#<?=$v;?>").val("<?=jsAddSlashes($ra[0][$v]);?>");
+      $("#<?=$v;?>_span").html("<?=jsAddSlashes($ra[0][$v]);?>");
       <?php
      }
      ?>
+     
+     //datetime
+     $("#create_datetime").datetimepicker({
+       timepicker:true,
+       format:'Y-m-d H:i:s'
+     });
+     $("#upload_datetime").datetimepicker({
+       timepicker:true,
+       format:'Y-m-d H:i:s'
+     });
   });
 </script>
-<div style="width:80%;height:500px;overflow:auto;">
+<style>
+.ppt_edit_table td{
+  padding:5px;
+}
+.ppt_edit_table input[type='text']{
+  width:95%;
+}
+.ppt_edit_table textarea{
+  width:95%;
+}
+</style>
+<div style="padding-left:25px;padding-right:25px;width:80%;width:600px;height:500px;overflow:auto;margin-left:auto;margin-right:auto;">
 <center>
-<h2>編輯【<?=$ra[0]['orin_filename'];?>】</h2>
+<h3>編輯【<?=$edit_title;?>】</h3>
 <form id="theform" name="theform">
-<table border="1" cellpadding="0" cellspacing="0">
+<div align="right">
+  <input type="button" value="關閉" onClick="dialogOff();">
+</div>
+<table class="ppt_edit_table" border="1" cellpadding="0" cellspacing="0" width="500">
   <tr>  
-    <th>項目</th>
+    <th width="35%">項目</th>
     <th>內容</th>
   </tr>
 
 <tr>
-                  <th align="center">ptt.doc.pdf...</th>
+                  <th align="center">檔案類型</th>
                   <td align="left">
-                    <input id="kind" name="kind" type="text">
+                    <input type="hidden" id="kind" name="kind">
+                    <span id="kind_span"></span>
                   </td>
                 </tr>
                 <tr>
@@ -61,21 +96,38 @@
                   </td>
                 </tr>
                 <tr>
-                  <th align="center">簡報類別:期初,期中,期末,評選,其他</th>
+                  <th align="center">簡報類別</th>
                   <td align="left">
-                    <input id="簡報類別" name="簡報類別" type="text">
+                    <select id="簡報類別" name="簡報類別">
+                       <option value="其他">其他</option>
+                       <option value="期初">期初</option>
+                       <option value="期中">期中</option>
+                       <option value="期末">期末</option>
+                       <option value="評選">評選</option>                       
+                    </select>
                   </td>
                 </tr>
                 <tr>
-                  <th align="center">報告書類型：期初,期中,期末,成果,服務建議書,其他</th>
-                  <td align="left">
-                    <input id="報告書類型" name="報告書類型" type="text">
+                  <th align="center">報告書類型</th>
+                  <td align="left">                    
+                    <select id="報告書類型" name="報告書類型">
+                       <option value="其他">其他</option>
+                       <option value="期初">期初</option>
+                       <option value="期中">期中</option>
+                       <option value="期末">期末</option>
+                       <option value="成果">成果</option>
+                       <option value="服務建議書">服務建議書</option>                       
+                    </select>
                   </td>
                 </tr>
                 <tr>
-                  <th align="center">是否有拿到計畫<br>0:未,1:有,2:其他</th>
-                  <td align="left">
-                    <input id="是否有拿到計畫" name="是否有拿到計畫" type="text">
+                  <th align="center">是否有拿到計畫</th>
+                  <td align="left">                    
+                    <select id="是否有拿到計畫" name="是否有拿到計畫">
+                      <option value='0'>還沒有</option>
+                      <option value='1'>有</option>
+                      <option value='2'>其他</option>
+                    </select>
                   </td>
                 </tr>
                 <tr>
@@ -88,36 +140,42 @@
                   <th align="center">委員名單</th>
                   <td align="left">
                     <input id="委員名單" name="委員名單" type="text">
+                    <br>(可逗號分格)
                   </td>
                 </tr>
                 <tr>
                   <th align="center">評選心得</th>
                   <td align="left">
-                    <input id="評選心得" name="評選心得" type="text">
+                    <textarea id="評選心得" name="評選心得"></textarea>
                   </td>
                 </tr>
                 <tr>
-                  <th align="center">是否延續型計畫<br>0:否,1:是,2:其他</th>
+                  <th align="center">是否延續型計畫</th>
                   <td align="left">
-                    <input id="是否延續型計畫" name="是否延續型計畫" type="text">
+                    <!--input id="是否延續型計畫" name="是否延續型計畫" type="text"-->
+                    <select id="是否延續型計畫" name="是否延續型計畫">
+                      <option value='0'>否</option>
+                      <option value='1'>是</option>
+                      <option value='2'>其他</option>
+                    </select>
                   </td>
                 </tr>               
                 <tr>
                   <th align="center">關鍵字</th>
                   <td align="left">
-                    <input id="keyword" name="keyword" type="text">
+                    <textarea id="keyword" name="keyword"></textarea>
                   </td>
                 </tr>
                 <tr>
                   <th align="center">原建立時間</th>
                   <td align="left">
-                    <input id="create_datetime" name="create_datetime" type="text">
+                    <input id="create_datetime" name="create_datetime" type="text" readonly>
                   </td>
                 </tr>
                 <tr>
                   <th align="center">上傳時間</th>
                   <td align="left">
-                    <input id="upload_datetime" name="upload_datetime" type="text">
+                    <input id="upload_datetime" name="upload_datetime" type="text" readonly>
                   </td>
                 </tr>
                 <tr>
@@ -129,21 +187,18 @@
                 <tr>
                   <th align="center">下載次數</th>
                   <td align="left">
-                    <input id="download_counter" name="download_counter" type="text">
+                    <input id="download_counter" name="download_counter" type="hidden">
+                    <span id="download_counter_span"></span>                     
                   </td>
                 </tr>
                 <tr>
                   <th align="center">被讚的次數</th>
                   <td align="left">
-                    <input id="grades" name="grades" type="text">
+                    <input id="grades" name="grades" type="hidden">
+                    <span id="grades_span"></span>  
                   </td>
-                </tr>
-
-
-
-
-  
-</table>
+                </tr>  
+          </table>
 </form>
 <br>
 <input type="button" value="儲存" id="ppt_save_btn">

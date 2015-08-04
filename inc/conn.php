@@ -57,18 +57,3 @@
   array_walk_recursive($_REQUEST, 'sanitizeVariables');
   
   
-  
-  $p=500;  //每頁顯示５筆
-  $px=5;   //每頁顯示跳頁用的５筆  
-  if(isset($page))
-  {
-    $page=(int)$page;
-  }
-  else if(isset($_GET['page']))
-  {
-    $page=(int)$_GET['page'];
-  }
-  else
-  {
-    $page=0;
-  }

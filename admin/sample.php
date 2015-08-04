@@ -6,5 +6,6 @@
 <?php require "{$base_dir}/template/top.php"; ?>
 <!--start-->
 <!--end-->
+<?php require "{$base_dir}/template/footer.php"; ?>
 </body>
 </html>

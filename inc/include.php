@@ -1917,7 +1917,7 @@
         $tmp.="<thead><tr>";
         foreach($ra[0] as $k=>$v)
         {
-          $tmp.="<th>{$k}</th>";
+          $tmp.="<th field=\"{$k}\">{$k}</th>";
         }
         $tmp.="</tr></thead>";
         $tmp.="<tbody>";
@@ -1926,7 +1926,7 @@
           $tmp.="<tr>";
           foreach($ra[$i] as $k=>$v)
           {
-            $tmp.="<td>{$v}</td>";
+            $tmp.="<td field=\"{$k}\">{$v}</td>";
           }
           $tmp.="</tr>";
         }
@@ -1940,7 +1940,7 @@
       $tmp.="<thead><tr>";
       foreach(explode(',',$headers) as $k=>$v)
       {
-        $tmp.="<th>{$v}</th>";
+        $tmp.="<th field=\"{$k}\">{$v}</th>";
       }
       $tmp.="</tr></thead>";
       $tmp.="<tbody>";
@@ -1949,8 +1949,8 @@
       {
         $tmp.="<tr>";
         foreach($m_fields as $k)
-        {
-          $tmp.="<td>{$ra[$i][$k]}</td>";
+        {          
+          $tmp.="<td field=\"{$k}\">{$ra[$i][$k]}</td>";
         }
         $tmp.="</tr>";
       }

@@ -4,6 +4,37 @@
   $GETS=getGET_POST($GETS_STRING,'GET');
   switch($GETS['mode'])
   {
+    case 'save_ppt_edit':
+      //後台維護的 ppt 編輯儲存
+      //pre_print_r($_POST);
+      /*
+          [kind] => pptx
+          [title] => 
+          [計畫名稱] => 
+          [年度] => 
+          [簡報人] => 
+          [簡報類別] => 
+          [報告書類型] => 
+          [是否有拿到計畫] => 2
+          [競爭對手] => 
+          [委員名單] => 
+          [評選心得] => 
+          [是否延續型計畫] => 2
+          [keyword] => 
+          [create_datetime] => 2015-08-03 09:56:03
+          [upload_datetime] => 2015-08-03 09:56:03
+          [author] => 
+          [download_counter] => 0
+          [grades] => 0      
+      */
+      $GETS_STRING="id";
+      $GETS=getGET_POST($GETS_STRING,'GET');
+      $POSTS_STRING="kind,title,計畫名稱,年度,簡報人,簡報類別,報告書類型,是否有拿到計畫,競爭對手,委員名單,評選心得,是否延續型計畫,keyword,create_datetime,upload_datetime,author,download_counter,grades";
+      $POSTS=getGET_POST($POSTS_STRING,'POST');      
+      updateSQL('ppt',$POSTS,"`id`='{$GETS['id']}'");
+      echo json_encode($POSTS,true);
+      exit();
+      break;
     case 'before_search':
       $POSTS_STRING="s";
       $POSTS=getGET_POST($POSTS_STRING,'POST');
@@ -205,8 +236,10 @@
           array_push($doc[$v['ppt_id']],$v);
         }
         
+        unset($ra);
+        
         $OUTPUT=ARRAY();
-        $OUTPUT['data']=$ra;
+        //$OUTPUT['data']=$ra;
         $OUTPUT['Gdata']=$doc;
         $OUTPUT['page']=$thepage;
         $OUTPUT['debug']=$SQL;

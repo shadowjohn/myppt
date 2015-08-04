@@ -12,7 +12,7 @@
 
   <script src="<?php echo $base_url;?>/inc/javascript/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
   <script src="<?php echo $base_url;?>/inc/javascript/php/php.js" type="text/javascript"></script>
-  <script src="<?php echo $base_url;?>/inc/javascript/jquery/mybox/mybox-0.6.min.js" type="text/javascript"></script>
+  <script src="<?php echo $base_url;?>/inc/javascript/jquery/mybox/mybox-0.7.min.js" type="text/javascript"></script>
   <script src="<?php echo $base_url;?>/inc/javascript/include.js" type="text/javascript"></script>
   <script src="<?php echo $base_url;?>/inc/javascript/jquery/jquery-placeholder/jquery.placeholder.min.js" type="text/javascript"></script>  
 
@@ -33,7 +33,12 @@
     $minclude_mode[$i]=strtolower(trim($minclude_mode[$i]));
     switch($minclude_mode[$i])
     {
-
+      case 'jquery-datetimepicker':
+        ?>
+        <script type="text/javascript" src="<?php echo $base_url;?>/inc/javascript/jquery/jquery-datetimepicker/jquery.datetimepicker.js"></script>
+        <link rel="stylesheet" type="text/css" href="<?php echo $base_url;?>/inc/javascript/jquery/jquery-datetimepicker/jquery.datetimepicker.css"/ >
+        <?php
+        break;
       case 'jquery-form':
         ?>
         <script type="text/javascript" src="<?php echo $base_url;?>/inc/javascript/jquery/jquery.form.js"></script>
@@ -53,6 +58,25 @@
       case 'jquery-corner':
           ?>
             <script src="<?php echo $base_url;?>/inc/javascript/jquery/jquery.corner.js" type="text/javascript"></script>
+          <?php
+        break;
+      case 'jquery-lazy':
+          ?>
+            <script src="<?=$base_url;?>/inc/javascript/jquery/jquery-image-lazy-loading/js/jquery.lazyload.min.js"></script>
+            <script language="javascript">
+              $(document).ready(function(){
+                if(navigator.platform != "iPad")
+                {
+                  //原本的圖片要改用
+                  // <img src="<?=$base_url;?>/inc/javascript/jquery/jquery-image-lazy-loading/images/grey.gif" data-original="原圖路徑">
+                  // 之後皆改用 php function lazyimg('src',"{'id','name','style'}");
+                  $("img").lazyload({
+                    effect:"fadeIn",
+                    placeholder: "<?=$base_url;?>/inc/javascript/jquery/jquery-image-lazy-loading/images/grey.gif"
+                  });
+                }
+              });
+            </script>              
           <?php
         break;  
     }
