@@ -3,7 +3,7 @@
 <?php require "{$base_dir}/template/head.php"; ?>
 <style>
 .thetable td{
-  border-bottom:2px dashed orange;
+  border-bottom:1px solid #666666;
 }
 </style>
 </head>

@@ -1940,7 +1940,7 @@
       $tmp.="<thead><tr>";
       foreach(explode(',',$headers) as $k=>$v)
       {
-        $tmp.="<th field=\"{$k}\">{$v}</th>";
+        $tmp.="<th field=\"{$v}\">{$v}</th>";
       }
       $tmp.="</tr></thead>";
       $tmp.="<tbody>";

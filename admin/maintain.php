@@ -24,6 +24,8 @@
   $ra=selectSQL_SAFE($SQL,$PA);
   foreach($ra as $k=>$v)
   {
+    //建檔時間
+    $ra[$k]['f_create_datetime']=date('Y-m-d',strtotime($ra[$k]['create_datetime']));
     //檔名顏色
     $ra[$k]['f_orin_filename']=str_ireplace("{$GETS['searchcode']}","<span class='find_word'>{$GETS['searchcode']}</span>",$ra[$k]['orin_filename']);
     $ra[$k]['f_title']=str_ireplace("{$GETS['searchcode']}","<span class='find_word'>{$GETS['searchcode']}</span>",$ra[$k]['title']);
@@ -76,6 +78,37 @@
 ?>
 <?php require "{$base_dir}/template/html.php"; ?>
 <?php require "{$base_dir}/template/head.php"; ?>
+<style>
+.thetable th[field='其他']{
+  width:140px;
+  text-align:center;  
+}
+.thetable th[field='檔案']{
+  width:60px;
+  text-align:center;  
+}
+.thetable th[field='PDF']{
+  width:60px;
+  text-align:center;  
+}
+.thetable th[field='圖檔/文字']{
+  width:60px;
+  text-align:center;  
+}
+.thetable td[field='ppt']{  
+  text-align:center;  
+}
+.thetable td[field='f_pdf_status']{  
+  text-align:center;  
+}
+.thetable td[field='f_png_status']{  
+  text-align:center;  
+}
+.thetable td[field='OTHER']{
+  padding:0px;  
+  text-align:center;  
+}
+</style>
 <script language="javascript">
   $(document).ready(function(){
     //維護
@@ -157,8 +190,8 @@
   <br>
   <center>
   <?php
-  echo print_table($ra,"f_id,f_orin_filename,f_title,create_datetime,ppt,f_pdf_status,f_png_status,OTHER",
-  "序號,檔名,標題,建檔時間,檔案,PDF,圖檔/文字,其他");
+  echo print_table($ra,"f_id,f_orin_filename,f_title,f_create_datetime,ppt,f_pdf_status,f_png_status,OTHER",
+  "序號,檔名,標題,建檔時間,檔案,PDF,圖檔/文字,其他","thetable");
   ?>
   <br>
   <?php

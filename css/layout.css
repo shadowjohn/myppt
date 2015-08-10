@@ -2,7 +2,7 @@
 
 @font-face{
 	font-family: "AntiqueOlive";
-	src:url("../fonts/AntiqueOlive.ttf");
+	/*src:url("../fonts/AntiqueOlive.ttf");*/
 	font-weight: normal;
 	font-style: normal;
 }
@@ -11,7 +11,7 @@ body{
 	background: url(../images/bg.jpg)no-repeat;
 	color: #ffffff;
 	background-color: #000000;
-	font-family: "微軟正黑體";
+	/*font-family: "微軟正黑體";*/
 }
 
 header{/*border: 1px solid #ff0000;*/
@@ -89,15 +89,18 @@ header{/*border: 1px solid #ff0000;*/
 /*star*/
 h2{
 	display: block;
-	width: 355px;
+	min-width: 1px;
 	height: 65px;
 	line-height: 65px;
 	background: url(../images/titleBg.png)no-repeat;
+  background-size:100% 100%;
 	text-align: center;
-	font-size: 28px;
+	font-size: 24px;
 	color: #26aae2;
 	margin: 20px auto;
 	border-bottom: none;
+  padding-left:30px;
+  padding-right:30px;
 }
 input[type="button"]{
 	-moz-box-shadow:inset 0px 0px 15px 3px #23395e;
@@ -145,7 +148,7 @@ input[type="text"],select{
 	margin: 0.2em 0;	
 }
 .title_ul{
-	padding-left: 200px;
+	padding-left: 50px;
 	list-style-type:square; 
 }
 .title_ul li{
@@ -162,17 +165,14 @@ input[type="text"],select{
 .title_ul li a:hover{
 	color: #26aae2;
 }
+
 table th {
     background-color: #c1f1ff;
     color: #0e1129;
     font-weight: bold;
-    padding: 10px 10px;
+   
 }
 
-table a{
-    color: #26aae2;
-    text-decoration: none;
-}
 
 
 table img {
@@ -184,4 +184,6 @@ table img {
 .thetable td {
     border-bottom: 1px solid #666666;
 }
-
+hr{
+  color:#666666;
+}

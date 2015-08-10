@@ -193,6 +193,14 @@
   background-color:white;
   border:1px solid #000;
 }
+.search_table {
+  width:90%;
+  margin-left:50px;
+  margin-right:50px;
+}
+.search_table td{
+  word-wrap:break-all;
+}
 </style>
 <script language="javascript">
   function like(id)
@@ -332,7 +340,7 @@
                 (讚次數：<?=$likes;?>)
                 <input type="button" value="詳細資料" onClick="$('#ppt_info_fieldset_<?=$ppt_info['id'];?>').toggle(); return false;">
               </a>
-              <fieldset id="ppt_info_fieldset_<?=$ppt_info['id'];?>" style="display:none;min-width:500px;">
+              <fieldset id="ppt_info_fieldset_<?=$ppt_info['id'];?>" style="display:none;width:300px;margin-left:50px;">
                 <legend><?=$mn;?> 詳細資料</legend>                             
                 檔案類型：<?=$ppt_info["kind"];?><br>
                 標題<?=$ppt_info["title"];?><br>

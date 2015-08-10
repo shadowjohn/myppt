@@ -24,3 +24,16 @@ h2{
 .trShow{
   background-color:#3300ff;
 }
+a{
+  color:#C1F1FF;
+}
+a:active{
+  color:#C1F1FF;
+} 
+a:visited{
+  color:#C1F1FF;
+}
+table a{
+  color: #C1F1FF;
+  text-decoration: none;
+}

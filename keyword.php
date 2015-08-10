@@ -7,7 +7,10 @@
 <!--start-->
 <center>
   <h2>關鍵詞維護</h2>
+  <br><br>
+  嘿嘿嘿~這個以後再說啦~
 </center>
+
 <!--end-->
 <?php require "{$base_dir}/template/footer.php"; ?>
 </body>
