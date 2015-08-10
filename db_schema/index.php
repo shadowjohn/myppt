@@ -1,10 +1,12 @@
 <?
+  /*
   $DB_HOST="localhost";
   $DB_LOGIN="ppt";
-  $DB_PASSWORD="*gis5200";
+  $DB_PASSWORD="***********";
   $DB_NAME="myppt";
   $DB_KIND="mysql"; 
-  
+  */
+  require '../../ppt_config.php';
   
   @ini_set("memory_limit","1024M");
   @ini_set('post_max_size', '800M');  
